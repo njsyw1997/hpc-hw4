@@ -1,0 +1,12 @@
+Rank 0/4 running on cs490.hpc.nyu.edu.
+Rank 3/4 running on cs493.hpc.nyu.edu.
+Rank 2/4 running on cs492.hpc.nyu.edu.
+Rank 1/4 running on cs491.hpc.nyu.edu.
+rank 0: sum 543534558726
+rank 0: ,error 0
+rank 1: sum 1091191137495
+rank 1: ,error 0
+rank 3: sum 2156379669668
+rank 3: ,error 0
+rank 2: sum 1612795381118
+rank 2: ,error 0

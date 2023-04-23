@@ -1,0 +1,4 @@
+Rank 0/2 running on gr003.hpc.nyu.edu.
+Rank 1/2 running on gr004.hpc.nyu.edu.
+pingpong latency: 1.841483e-03 ms
+pingpong bandwidth: 1.118808e+01 GB/s

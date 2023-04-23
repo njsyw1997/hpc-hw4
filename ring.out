@@ -1,0 +1,6 @@
+N=5000Rank 0/4 running on cs488.hpc.nyu.edu.
+Rank 2/4 running on cs490.hpc.nyu.edu.
+Rank 3/4 running on cs491.hpc.nyu.edu.
+Ran: 1/4 running on cs489.hpc.nyu.edu.
+ring latency: 2.486492e-07 ms
+ring bandwidth: 1.292092e+05 GB/s
