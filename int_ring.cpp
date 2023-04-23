@@ -16,12 +16,12 @@ int main(int argc, char** argv)
     MPI_Comm comm = MPI_COMM_WORLD;
     MPI_Comm_rank(comm, &rank);
     MPI_Comm_size(comm, &size);
-
+    if (!rank) printf("N=%d",N);
     char processor_name[MPI_MAX_PROCESSOR_NAME];
     int name_len;
     MPI_Get_processor_name(processor_name, &name_len);
     printf("Rank %d/%d running on %s.\n", rank, size, processor_name);
-    
+
     double latency1;
     double tt1 = MPI_Wtime();
     { 

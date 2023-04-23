@@ -60,31 +60,41 @@ void scan_omp(long* prefix_sum, const long* A, long n) {
 int main(int argc, char** argv)
 {
     MPI_Init(&argc, &argv);
+    if (argc < 2) {
+        printf("Usage: mpirun ./scan <vec_size>\n");
+      abort();
+    }
+    long vec_size=atoi(argv[1]);
     int rank, size;
     MPI_Comm comm = MPI_COMM_WORLD;
     MPI_Comm_rank(comm, &rank);
     MPI_Comm_size(comm, &size);
-    
+
     char processor_name[MPI_MAX_PROCESSOR_NAME];
     int name_len;
     MPI_Get_processor_name(processor_name, &name_len);
     printf("Rank %d/%d running on %s.\n", rank, size, processor_name);
 
-    long vec_size=500;
+    
     long N=size*vec_size;
     long* a;
+    long* a_ref;
     long* b=new long[vec_size];
+    long* prefix_sum_ref=new long[vec_size];
     if (rank==0)
     {
         a=new long[N];
         for (long i = 0; i < N; i++)
         {
-            // a[i] = rand();
-            a[i] = 1;
+            a[i] = rand();
+            // a[i] = 1;
         }
+        a_ref=new long[N];
+        scan_seq(a_ref, a, N);
     } 
     MPI_Barrier(comm);  
     MPI_Scatter(a, vec_size, MPI_LONG, b, vec_size, MPI_LONG, 0, comm);
+    MPI_Scatter(a_ref, vec_size, MPI_LONG, prefix_sum_ref, vec_size, MPI_LONG, 0, comm);
     long* prefix_sum=new long[vec_size];
 #if defined(_OPENMP)
     scan_omp(prefix_sum, b, vec_size);
@@ -99,6 +109,15 @@ int main(int argc, char** argv)
             prefix_sum[j]+=r[i];
         }
     }
-    printf("rank %d: ,sum %ld\n", rank,prefix_sum[vec_size-1]);
+    printf("rank %d: sum %ld\n", rank,prefix_sum[vec_size-1]);
+    long error=0;
+    for (long i = 0; i < vec_size; i++)
+    {
+        if (prefix_sum[i]!=prefix_sum_ref[i])
+        {
+            error++;
+        }
+    }
+    printf("rank %d: ,error %ld\n", rank,error);
     MPI_Finalize();
 }
