@@ -45,7 +45,7 @@ int main(int argc, char** argv)
             MPI_Recv(&message_in, 1, MPI_INT, (rank-1+size)%size, 999, comm, MPI_STATUS_IGNORE);
             // printf("Rank %d received %d\n", rank, message_in);
         }
-        latency1=(MPI_Wtime()-tt1)/(N*size);
+        latency1=MPI_Wtime()-tt1;
     }
     if (!rank) printf("ring latency: %e ms\n", latency1/(N*size+1) * 1000);
     double tt2;
@@ -72,9 +72,9 @@ int main(int argc, char** argv)
         {
             MPI_Recv(message_in, message_size, MPI_INT, (rank-1+size)%size, 999, comm, MPI_STATUS_IGNORE);
         }
-        latency2=(MPI_Wtime()-tt2)/(N*size);
+        latency2=MPI_Wtime()-tt2;
     }
-    if (!rank) printf("ring bandwidth: %e GB/s\n", message_size*2*(N*size+1)/(latency2*1e9));      
+    if (!rank) printf("ring bandwidth: %e GB/s\n", message_size*(N*size+1)/(latency2*1e9));      
     MPI_Finalize();
 
 }
