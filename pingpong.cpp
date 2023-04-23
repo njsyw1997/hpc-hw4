@@ -1,4 +1,4 @@
-// Compile: mpic++ pingpong.cpp -o pingpong
+// Compile: mpic++ -o pingpong pingpong.cpp 
 #include <stdio.h>
 #include <cstdlib>
 #include <mpi.h>

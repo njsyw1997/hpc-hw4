@@ -1,4 +1,4 @@
-// mpic++ -std=c++11 -o scan scan.cpp
+// mpic++ -o scan scan.cpp
 #include <stdio.h>
 #include <cstdlib>
 #include <mpi.h>

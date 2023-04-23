@@ -1,4 +1,4 @@
-// Compile: mpic++ -O3 -o int_ring int_ring.cpp
+// Compile: mpic++ -O3 -o ring int_ring.cpp
 #include <stdio.h>
 #include <cstdlib>
 #include <mpi.h>
