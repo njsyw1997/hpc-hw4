@@ -52,8 +52,8 @@ int main(int argc, char** argv)
     double latency2;
     long message_size=2000000;
     {        
-        int* message_out=new int[message_size];
-        int* message_in=new int[message_size];
+        char* message_out=new char[message_size];
+        char* message_in=new char[message_size];
         for (long i = 0; i < message_size; i++)
         {
             message_out[i]=0;
@@ -61,16 +61,16 @@ int main(int argc, char** argv)
         tt2 = MPI_Wtime();
         if (rank==0)
         {
-            MPI_Send(message_out, message_size, MPI_INT, (rank+1)%size, 999, comm);
+            MPI_Send(message_out, message_size, MPI_CHAR, (rank+1)%size, 999, comm);
         }
         for (size_t i = 0; i < N; i++)
         {
-            MPI_Recv(message_in, message_size, MPI_INT, (rank-1+size)%size, 999, comm, MPI_STATUS_IGNORE);
-            MPI_Send(message_out, message_size, MPI_INT, (rank+1)%size, 999, comm);
+            MPI_Recv(message_in, message_size, MPI_CHAR, (rank-1+size)%size, 999, comm, MPI_STATUS_IGNORE);
+            MPI_Send(message_out, message_size, MPI_CHAR, (rank+1)%size, 999, comm);
         } 
         if (rank==1)
         {
-            MPI_Recv(message_in, message_size, MPI_INT, (rank-1+size)%size, 999, comm, MPI_STATUS_IGNORE);
+            MPI_Recv(message_in, message_size, MPI_CHAR, (rank-1+size)%size, 999, comm, MPI_STATUS_IGNORE);
         }
         latency2=MPI_Wtime()-tt2;
     }
