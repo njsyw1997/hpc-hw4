@@ -12,4 +12,4 @@
 module purge 
 module load openmpi/gcc/4.0.5 
 
-mpiexec ./ring 50
+mpiexec ./ring 10000
